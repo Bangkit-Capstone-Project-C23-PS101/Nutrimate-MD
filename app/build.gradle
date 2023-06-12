@@ -31,6 +31,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        mlModelBinding true
     }
 }
 
@@ -39,6 +40,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation "androidx.paging:paging-runtime-ktx:3.1.0"
     implementation 'androidx.room:room-paging:2.4.0-rc01'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     def camerax_version = "1.2.2"

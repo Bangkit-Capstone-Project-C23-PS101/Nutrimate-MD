@@ -51,6 +51,7 @@ class PhotoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotoBinding.inflate(layoutInflater)
+        getSupportActionBar()?.hide()
         setContentView(binding.root)
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
