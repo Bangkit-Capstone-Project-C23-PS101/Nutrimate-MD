@@ -20,3 +20,6 @@ Nutrimate app is used to interact with users in predicting Indonesian food and c
 - [x] Predicting Food and Calculate the Nutrition Value
 - [x] Food History
 - [x] List of Indonesian Food
+
+## APK Link
+[Nutrimate.apk](https://drive.google.com/file/d/1oiLXlk_BX3Qqo9cntoG3j2Uze-ZrXMnk/view?usp=sharing)
