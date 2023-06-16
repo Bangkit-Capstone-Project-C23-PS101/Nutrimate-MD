@@ -113,6 +113,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                             <TextView
+                                android:id="@+id/tv_home_calorie"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="130 cal"
@@ -191,6 +192,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"/>
                 <TextView
+                    android:id="@+id/tv_home_description"
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -209,6 +211,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"/>
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_cross"
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:backgroundTint="#C86666"
@@ -216,6 +219,7 @@
                         app:iconPadding="0dp"
                         app:iconGravity="textStart"/>
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_check"
                         android:layout_marginHorizontal="10dp"
                         android:layout_width="40dp"
                         android:layout_height="30dp"

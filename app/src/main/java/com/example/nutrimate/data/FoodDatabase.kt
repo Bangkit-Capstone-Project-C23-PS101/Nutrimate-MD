@@ -17,5 +17,5 @@ data class FoodDatabase (
     @ColumnInfo(name = "name")
     var name: String? = null,
     @ColumnInfo(name = "calorie")
-    var calorie: Int = 0
+    var calorie: String? = null
 ) : Parcelable

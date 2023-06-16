@@ -14,6 +14,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.nutrimate.data.FoodData
+import com.example.nutrimate.data.FoodDatabase
 import com.example.nutrimate.databinding.FragmentHomeBinding
 import com.example.nutrimate.ml.ConvertedModel
 import com.example.nutrimate.ml.Model
@@ -39,6 +42,7 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private var getFile: File? = null
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding  = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        homeViewModel = obtainViewModel(requireActivity() as AppCompatActivity)
         binding.buttonAdd.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Select from Gallery or Camera")
@@ -61,6 +66,21 @@ class HomeFragment : Fragment() {
                     startCameraX()
                 }
                 .show()
+        }
+        binding.buttonCross.setOnClickListener{
+            binding.cardviewFood.isVisible = false
+        }
+        binding.buttonCheck.setOnClickListener {
+            for (food in FoodData.listfood){
+
+                if(food.name == binding.tvHomeFoodname.text.toString()){
+                    Log.d("TES",food.name)
+                    val image = food.image
+                    val food = FoodDatabase(name = binding.tvHomeFoodname.text.toString(), calorie = binding.tvHomeCalorie.text.toString(), image = image)
+                    homeViewModel.insert(food)
+                }
+            }
+            binding.cardviewFood.isVisible = false
         }
         if(getFile==null){
             binding.cardviewFood.isVisible = false
@@ -94,9 +114,11 @@ class HomeFragment : Fragment() {
                 rotateFile(file, isBackCamera)
                 getFile = file
                 val bitmap = BitmapFactory.decodeFile(file.path)
-                classifyImage(bitmap)
+                val image = Bitmap.createScaledBitmap(bitmap, 150, 150, false)
+                classifyImage(image)
+                val picture = Bitmap.createScaledBitmap(bitmap, 320, 225, false)
                 binding.cardviewFood.isVisible = true
-                binding.imgHomeFood.setImageBitmap(bitmap)
+                binding.imgHomeFood.setImageBitmap(picture)
             }
         }
     }
@@ -138,7 +160,12 @@ class HomeFragment : Fragment() {
         }
         val classes = arrayOf("Mie Goreng", "Mie Ayam", "Nasi Goreng", "Bakso", "Sate Ayam", "Ayam Goreng Lalapan", "Nasi Pecel", "Bubur Ayam", "Gado-Gado", "Rendang", "Capcay", "Ikan Goreng Lalapan", "Soto Ayam", "Nasi Rawon", "Telur Goreng")
         binding.tvHomeFoodname.setText(classes[maxPos])
-
+        for(food in FoodData.listfood){
+            if(classes[maxPos]==food.name){
+                binding.tvHomeCalorie.text = food.calorie.toString()
+                binding.tvHomeDescription.text = food.description
+            }
+        }
 // Releases model resources if no longer used.
         model?.close()
     }
@@ -166,5 +193,10 @@ class HomeFragment : Fragment() {
                 binding.imgHomeFood.setImageBitmap(pic)
             }
         }
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): HomeViewModel {
+        val factory = FoodViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(HomeViewModel::class.java)
     }
 }

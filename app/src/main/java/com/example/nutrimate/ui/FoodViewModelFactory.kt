@@ -9,13 +9,13 @@ class FoodViewModelFactory private constructor(private val mApplication: Applica
         @Volatile
         private var INSTANCE: FoodViewModelFactory? = null
         @JvmStatic
-        fun getInstance(application: Application): ViewModelFactory {
+        fun getInstance(application: Application): FoodViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(FoodViewModelFactory::class.java) {
                     INSTANCE = FoodViewModelFactory(application)
                 }
             }
-            return INSTANCE as ViewModelFactory
+            return INSTANCE as FoodViewModelFactory
         }
     }
 
