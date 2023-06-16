@@ -8,12 +8,19 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.nutrimate.data.Result
 import com.example.nutrimate.databinding.ActivityLoginBinding
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+//    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
+//        auth = Firebase.auth
         loginViewModel = obtainViewModel(this@LoginActivity)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         getSupportActionBar()?.hide()
@@ -25,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("LoginActivity",password)
             if(email.isNotEmpty() and password.isNotEmpty()){
                 loginResult("go")
+//                signIn(email,password)
 //                loginViewModel.login(email, password).observe(this){
 //                    if(it!=null){
 //                        if(it is Result.Success){
@@ -61,4 +69,26 @@ class LoginActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory).get(LoginViewModel::class.java)
     }
+
+//    private fun signIn(email: String, password: String) {
+//        // [START sign_in_with_email]
+//        auth.signInWithEmailAndPassword(email, password)
+//            .addOnCompleteListener(this) { task ->
+//                if (task.isSuccessful) {
+//                    // Sign in success, update UI with the signed-in user's information
+//                    Log.d("LoginActivity", "signInWithEmail:success")
+//                    val user = auth.currentUser
+//                    loginResult(user?.uid.toString())
+//                } else {
+//                    // If sign in fails, display a message to the user.
+//                    Log.w("LoginActivity", "signInWithEmail:failure", task.exception)
+//                    Toast.makeText(
+//                        baseContext,
+//                        "Authentication failed.",
+//                        Toast.LENGTH_SHORT,
+//                    ).show()
+//                }
+//            }
+//        // [END sign_in_with_email]
+//    }
 }
