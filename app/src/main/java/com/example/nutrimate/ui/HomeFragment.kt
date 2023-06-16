@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.nutrimate.databinding.FragmentHomeBinding
+import com.example.nutrimate.ml.ConvertedModel
 import com.example.nutrimate.ml.Model
 import com.example.nutrimate.tool.rotateFile
 import com.example.nutrimate.tool.uriToFile
@@ -101,7 +102,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun classifyImage(image: Bitmap) {
-        val model = context?.let { Model.newInstance(it) }
+        val model = context?.let { ConvertedModel.newInstance(it) }
         val imageSize = 150
 
 // Creates inputs for reference.
@@ -161,7 +162,8 @@ class HomeFragment : Fragment() {
                 binding.cardviewFood.isVisible = true
                 val image = Bitmap.createScaledBitmap(bitmap, 150, 150, false)
                 classifyImage(image)
-                binding.imgHomeFood.setImageURI(uri)
+                val pic = Bitmap.createScaledBitmap(bitmap,320,225,false)
+                binding.imgHomeFood.setImageBitmap(pic)
             }
         }
     }

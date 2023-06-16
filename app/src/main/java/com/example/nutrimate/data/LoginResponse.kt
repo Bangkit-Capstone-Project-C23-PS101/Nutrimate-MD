@@ -3,10 +3,12 @@ package com.example.nutrimate.data
 import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
-    @SerializedName("error")
-    val error: Boolean,
-    @SerializedName("message")
-    val message: String,
-    @SerializedName("loginResult")
-    val loginResult: LoginResult
+    @SerializedName("token")
+    val token: String,
+//    @SerializedName("error")
+//    val error: Boolean,
+//    @SerializedName("message")
+//    val message: String,
+//    @SerializedName("loginResult")
+//    val loginResult: LoginResult
 )

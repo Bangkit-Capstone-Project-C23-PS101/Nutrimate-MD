@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <EditText
+                    android:id="@+id/et_search_food"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:padding="10dp"
@@ -28,6 +29,7 @@
                     android:layout_weight="1"
                     android:hint="Search the food database.."
                     android:background="@android:color/transparent"
+                    android:textColor="@color/white"
                     android:textColorHint="#B1B1B1"/>
                 <ImageView
                     android:layout_width="50dp"
